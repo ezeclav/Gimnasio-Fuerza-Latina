@@ -1,0 +1,33 @@
+.user-profile-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #646464;
+  text-align: center;
+}
+
+.user-profile-container h2 {
+  margin-bottom: 20px;
+}
+
+.user-profile-info {
+  margin-bottom: 20px;
+}
+
+.edit-profile-button {
+  margin: 0 auto;
+  width: 40%;
+  padding: 10px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.edit-profile-button:hover {
+  background-color: #0056b3;
+}

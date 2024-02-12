@@ -1,0 +1,17 @@
+.GymFont {
+  font-family: "Black Ops One", system-ui;
+  font-size: 3rem;
+  color: #1278bf;
+  text-shadow: 0px 0px 9px #508ad3;
+}
+img {
+  object-fit: fill;
+  object-position: 0% 0%;
+}
+@media (max-width: 768px) {
+  .GymFont,
+  h2,
+  h3 {
+    font-size: 1rem;
+  }
+}

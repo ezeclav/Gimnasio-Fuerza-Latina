@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "588bba59-c009-447d-82ac-311f9bb9f8ff",
+		"name": "gimnasio-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31390999"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"gusta\",\r\n    \"email\": \"gustavojorgebozzano@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gustavojorgebozzano@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userProfilePublic",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzA1NjA2MzUwLCJleHAiOjE3MDU4NjU1NTB9.D1PcUOOpHpWbcf2Kqe-T29QYnrXVCICCZnVMgLjaDro",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3050/api/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userProfilePrivate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcwNTY4NDA4OSwiZXhwIjoxNzA1OTQzMjg5fQ.JTBFzxjmeaEOx3KslYV6oE5F7HPiVWEJZE80EUkb7Kw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3050/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recoverPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gustavo.tecnicoftth@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/users/password/recover",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"users",
+								"password",
+								"recover"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateRecoverPassword",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gustavo.tecnicoftth@gmail.com\",\r\n    \"recoverPassCode\": \"Gouvm5xG0w\",\r\n    \"newPassword\": \"87654321\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/users/password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"users",
+								"password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "exercises",
+			"item": [
+				{
+					"name": "newExercise",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzA1NjA2MzUwLCJleHAiOjE3MDU4NjU1NTB9.D1PcUOOpHpWbcf2Kqe-T29QYnrXVCICCZnVMgLjaDro",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Close-Grip Rail Press",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "El Press con Agarre Cerrado desde los Rieles es un ejercicio que se realiza utilizando una barra en rieles. Este movimiento se centra en trabajar los tríceps, especialmente con un agarre más cerrado. Realiza 3 series de 10, 6 y 4 repeticiones, eligiendo un peso que te permita llegar al fallo en cada repetición.",
+									"type": "text"
+								},
+								{
+									"key": "typology",
+									"value": "fuerza",
+									"type": "text"
+								},
+								{
+									"key": "muscle_group",
+									"value": "Tríceps",
+									"type": "text"
+								},
+								{
+									"key": "equipment",
+									"value": "Barra y rieles",
+									"type": "text"
+								},
+								{
+									"key": "img1",
+									"type": "file",
+									"src": "/C:/Users/Gustavo/Documents/Certificados/Hack_a_Boss/PROYECTO 2 - APP para el entrenamiento/GYM-API/5 - TRICEPS/1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/NewExercises",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"NewExercises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modifExercise",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzA1NjA2MzUwLCJleHAiOjE3MDU4NjU1NTB9.D1PcUOOpHpWbcf2Kqe-T29QYnrXVCICCZnVMgLjaDro",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Weighted Dip Tri-Set.",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "El Fondo con Peso en Tri Set es un ejercicio compuesto para fuerza que implica realizar fondos con peso en tres posiciones diferentes. Este ejercicio trabaja intensamente los tríceps. Realiza 3 series hasta el fallo en cada posición, con una transición inmediata de fondos con peso a fondos con peso corporal y fondos asistidos.",
+									"type": "text"
+								},
+								{
+									"key": "typology",
+									"value": "fuerza",
+									"type": "text"
+								},
+								{
+									"key": "muscle_group",
+									"value": "Tríceps",
+									"type": "text"
+								},
+								{
+									"key": "equipment",
+									"value": "Barra paralela y peso adicional",
+									"type": "text"
+								},
+								{
+									"key": "img1",
+									"type": "file",
+									"src": "/C:/Users/Gustavo/Documents/Certificados/Hack_a_Boss/PROYECTO 2 - APP para el entrenamiento/GYM-API/5 - TRICEPS/2.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/modifExercise/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"modifExercise",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allExercises",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzA1NjA2MzUwLCJleHAiOjE3MDU4NjU1NTB9.D1PcUOOpHpWbcf2Kqe-T29QYnrXVCICCZnVMgLjaDro",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3050/api/exercises",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"exercises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "exerciseById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcwNTUxODAwMCwiZXhwIjoxNzA1Nzc3MjAwfQ.AHM8Xe0BmEu4NQ76cCKVRv0VxWTD6PJGDlPHhgD5j10",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3050/api/exercise/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"exercise",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteExerciseById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzA1NjA2MzUwLCJleHAiOjE3MDU4NjU1NTB9.D1PcUOOpHpWbcf2Kqe-T29QYnrXVCICCZnVMgLjaDro",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3050/api/deleteExercise/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"deleteExercise",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "voteExercise",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcwNTUxODAwMCwiZXhwIjoxNzA1Nzc3MjAwfQ.AHM8Xe0BmEu4NQ76cCKVRv0VxWTD6PJGDlPHhgD5j10",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3050/exercises/1/like",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"exercises",
+								"1",
+								"like"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
