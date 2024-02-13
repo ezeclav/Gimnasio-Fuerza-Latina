@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Auth from "../../../utils/auth";
+import auth from "../../../utils/auth";
 import { useNavigate } from "react-router-dom";
-import ErrorModal from "../../Error"; // Ajusta la ruta según la ubicación real de tu componente ErrorModal
+import ErrorModal from "../../Error";
 import "./ExercisePhoto.css";
 
 function ExercisePhoto({ exerciseId, onUpload, onClose }) {
@@ -25,7 +25,7 @@ function ExercisePhoto({ exerciseId, onUpload, onClose }) {
     formData.append("photo", file);
 
     try {
-      const token = Auth.getToken();
+      const token = auth.getToken();
       const response = await axios.post(
         `api/exercise/${exerciseId}/photo`,
         formData,
@@ -34,7 +34,7 @@ function ExercisePhoto({ exerciseId, onUpload, onClose }) {
             Authorization: token,
             "Content-Type": "multipart/form-data",
           },
-        },
+        }
       );
       navigate("/exercise/");
     } catch (error) {
@@ -50,10 +50,12 @@ function ExercisePhoto({ exerciseId, onUpload, onClose }) {
 
   return (
     <div className="exercise-details-container">
-      <h2 className="entry-title">Agregar Foto</h2>
+      <h2 className="entry-title">Foto del ejercicio</h2>
       <input type="file" accept="image/*" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Subir Foto</button>
-      <button onClick={onClose}>Cancelar</button>
+      <div>
+        <button onClick={handleUpload}>Subir Foto</button>
+        <button onClick={onClose}>Cancelar</button>
+      </div>
       {showErrorModal && (
         <ErrorModal errorMessage={error} onClose={handleModalClose} />
       )}

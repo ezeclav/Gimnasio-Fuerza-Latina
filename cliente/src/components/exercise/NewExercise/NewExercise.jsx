@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import auth from "../../../utils/auth";
-import ExercisePhoto from "../ExercisePhoto/ExercisePhoto";
-import "./NewExercise.css";
+// import ExercisePhoto from "../ExercisePhoto/ExercisePhoto";
 import { Link, useNavigate } from "react-router-dom";
+
+import "./NewExercise.css";
 
 function NewExercise() {
   const [okExercise, SetOkExercise] = useState("");
@@ -43,7 +44,6 @@ function NewExercise() {
           Authorization: token,
         },
       });
-      // console.log("New exercise created:", response.data);
       if (response.data.status === "ok") {
         navigate("/exercise");
         SetOkExercise("Ejercicio creado con EXITO..!!!");

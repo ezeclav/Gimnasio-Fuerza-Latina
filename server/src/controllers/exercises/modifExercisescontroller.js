@@ -33,8 +33,9 @@ const modifExercisesController = async (req, res, next) => {
       photoName
     );
 
-    const { name: imgName } = exercise[0];
-    await deletePhotoService(imgName);
+    // se utilizaría si se almacena de manera local
+    // const { name: imgName } = exercise[0];
+    // await deletePhotoService(imgName);
 
     res.send({
       status: "ok",

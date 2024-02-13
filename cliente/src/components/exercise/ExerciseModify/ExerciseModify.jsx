@@ -1,71 +1,123 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import auth from "../../../utils/auth";
+import { Link, useParams } from "react-router-dom";
+import ExercisePhoto from "../ExercisePhoto/ExercisePhoto";
 
-const ExerciseModify = () => {
-  const { exerciseId } = useParams();
-  const [exercise, setExercise] = useState({
+import "./ExerciseModify.css";
+
+function ExerciseModify() {
+  const [okExercise, setOkExercise] = useState("");
+  const [formData, setFormData] = useState({
     name: "",
     description: "",
-    typology: "",
+    typology: "Fuerza",
     muscle_group: "",
-    equipment: ""
+    equipment: "",
   });
+  const { exerciseId } = useParams();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const token = localStorage.getItem("token");
+  useEffect(() => {
+    const fetchExerciseData = async () => {
+      const token = auth.getToken();
+      try {
+        const response = await axios.get(`/api/exercise/${exerciseId}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
 
-      const options = {
-        headers: {
-          Authorization: token,
-        },
-      };
+        const { name, description, typology, muscle_group, equipment } =
+          response.data.data;
 
-      await axios.put(`/api/modifExercise/${exerciseId}`, options, {
-        headers: {
-          Authorization: token
-        }
-      });
-    } catch (error) {
-      console.error("Error al modificar el ejercicio:", error);
-    }
-  };
+        setFormData({
+          name,
+          description,
+          typology,
+          muscle_group,
+          equipment,
+        });
+      } catch (error) {
+        console.error("Error al obtener información del ejercicio:", error);
+      }
+    };
+
+    fetchExerciseData();
+  }, [exerciseId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setExercise((prevExercise) => ({
-      ...prevExercise,
-      [name]: value
-    }));
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
+  const handlePhotoChange = (file) => {
+    setFormData({
+      ...formData,
+      photo: file,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setOkExercise("");
+
+    const token = auth.getToken();
+    try {
+      // Modificar la información del ejercicio
+      const response = await axios.put(
+        `api/modifExercise/${exerciseId}`,
+        formData,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      if (response.data.status === "ok") {
+        setOkExercise("Ejercicio modificado con éxito.");
+      }
+    } catch (error) {
+      console.error("Error al modificar el ejercicio:", error);
+      const noOk = error.response?.data?.message || "Intente nuevamente.";
+      setOkExercise(`ERROR al modificar el ejercicio: ${noOk}`);
+    }
+  };
 
   return (
-    <div>
-      <h2>Editar Ejercicio</h2>
+    <div className="modify-exercise-form">
+      <h2>Modificar ejercicio</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Nombre:
+        <div className="form-group">
+          <label htmlFor="name">Nombre:</label>
           <input
+            required
             type="text"
+            id="name"
             name="name"
-            autoComplete="off"
-            value={exercise.name}
+            value={formData.name}
             onChange={handleChange}
+            className="form-control"
           />
-        </label>
-        <label>
-          Descripción:
-          <textarea
-            name="description"
-            value={exercise.description}
-            onChange={handleChange}
-          />
-        </label>
+        </div>
 
-        <label htmlFor="typology">Tipología:</label>
+        <div className="form-group">
+          <label htmlFor="descrpition">Descripción: </label>
+          <textarea
+            required
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            className="form-control"
+          ></textarea>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="typology">Tipología:</label>
           <input
             required
             type="radio"
@@ -94,28 +146,54 @@ const ExerciseModify = () => {
             checked={formData.typology === "Resistencia"}
           />
           Resistencia
-        <label>
-          Grupo Muscular:
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="muscle_group">Grupo Muscular:</label>
           <input
+            required
             type="text"
+            id="muscle_group"
             name="muscle_group"
-            value={exercise.muscle_group}
+            value={formData.muscle_group}
             onChange={handleChange}
+            className="form-control"
           />
-        </label>
-        <label>
-          Equipamiento:
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="equipment">Equipo:</label>
           <input
+            required
             type="text"
+            id="equipment"
             name="equipment"
-            value={exercise.equipment}
+            value={formData.equipment}
             onChange={handleChange}
+            className="form-control"
           />
-        </label>
-        <button type="submit">Guardar</button>
+        </div>
+        <ExercisePhoto
+          exerciseId={exerciseId}
+          onUpload={handlePhotoChange}
+          onClose={() => {}}
+        />
+
+        <button type="submit" className="btn btn-primary">
+          Modificar Ejercicio
+        </button>
+        <Link
+          to="#"
+          onClick={() => window.history.back()}
+          className="btn btn-secondary"
+        >
+          Cancelar
+        </Link>
+
+        {okExercise && <p>{okExercise}</p>}
       </form>
     </div>
   );
-};
+}
 
 export default ExerciseModify;

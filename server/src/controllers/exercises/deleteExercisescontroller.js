@@ -10,9 +10,9 @@ const deleteExercisescontroller = async (req, res, next) => {
 
     const exercise = await deleteExerciseModel(exerciseId);
 
-    const { name } = exercise[0];
-
-    await deletePhotoService(name);
+    //// si se utilizara almacenamiento local
+    // const { name } = exercise[0];
+    // await deletePhotoService(name);
 
     res.send({
       status: "ok",
