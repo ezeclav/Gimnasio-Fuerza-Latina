@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import auth from "../../../utils/auth";
 import { Link, useParams } from "react-router-dom";
-import ExercisePhoto from "../ExercisePhoto/ExercisePhoto";
 
 import "./ExerciseModify.css";
 
@@ -15,6 +14,7 @@ function ExerciseModify() {
     muscle_group: "",
     equipment: "",
   });
+  const [newPhoto, setNewPhoto] = useState(null); // Nuevo estado para la nueva foto
   const { exerciseId } = useParams();
 
   useEffect(() => {
@@ -54,10 +54,7 @@ function ExerciseModify() {
   };
 
   const handlePhotoChange = (file) => {
-    setFormData({
-      ...formData,
-      photo: file,
-    });
+    setNewPhoto(file); // Guarda la nueva foto en el estado
   };
 
   const handleSubmit = async (e) => {
@@ -66,13 +63,26 @@ function ExerciseModify() {
 
     const token = auth.getToken();
     try {
-      // Modificar la información del ejercicio
+      // objeto FormData para incluir datos y la nueva foto
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("description", formData.description);
+      formDataToSend.append("typology", formData.typology);
+      formDataToSend.append("muscle_group", formData.muscle_group);
+      formDataToSend.append("equipment", formData.equipment);
+
+      if (newPhoto) {
+        formDataToSend.append("photo", newPhoto);
+      }
+
+      // solicitud PUT para la modificación
       const response = await axios.put(
         `api/modifExercise/${exerciseId}`,
-        formData,
+        formDataToSend,
         {
           headers: {
             Authorization: token,
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -173,11 +183,17 @@ function ExerciseModify() {
             className="form-control"
           />
         </div>
-        <ExercisePhoto
-          exerciseId={exerciseId}
-          onUpload={handlePhotoChange}
-          onClose={() => {}}
-        />
+
+        <div className="form-group">
+          <label htmlFor="photo">Nueva Foto:</label>
+          <input
+            type="file"
+            id="photo"
+            name="photo"
+            accept="image/*"
+            onChange={(e) => handlePhotoChange(e.target.files[0])}
+          />
+        </div>
 
         <button type="submit" className="btn btn-primary">
           Modificar Ejercicio

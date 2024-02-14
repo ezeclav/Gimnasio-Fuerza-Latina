@@ -2,9 +2,8 @@ import insertPhotoModel from "../../models/exercises/insertPhotoModel.js";
 import selectExerciseByIdModel from "../../models/exercises/selectExerciseByIdModel.js";
 import { cloudinaryService } from "../../services/cloudinaryService.js";
 import { photoLimitReachedError } from "../../services/errorService.js";
-import validateSchemaUtil from "../../util/validateSchemaUtil.js";
 
-const addEntryPhotoController = async (req, res, next) => {
+const addExercisePhotoController = async (req, res, next) => {
   try {
     // Obtenemos el id de al entrada de los path params.
     const { exerciseId } = req.params;
@@ -34,4 +33,4 @@ const addEntryPhotoController = async (req, res, next) => {
   }
 };
 
-export default addEntryPhotoController;
+export default addExercisePhotoController;

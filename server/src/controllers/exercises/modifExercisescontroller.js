@@ -1,11 +1,10 @@
-// import jwt from "jsonwebtoken";
-
+import { cloudinaryService } from "../../services/cloudinaryService.js";
 import modifExerciseModel from "../../models/exercises/modifExerciseModel.js";
 import { emptyFieldExerciseError } from "../../services/errorService.js";
-import {
-  savePhotoService,
-  deletePhotoService,
-} from "../../services/photoService.js";
+// import {
+//   savePhotoService,
+//   deletePhotoService,
+// } from "../../services/photoService.js";
 
 const modifExercisesController = async (req, res, next) => {
   try {
@@ -17,11 +16,21 @@ const modifExercisesController = async (req, res, next) => {
 
     let photoName = "";
 
-    if (req.files) {
-      for (let photo of Object.values(req.files).slice(0, 1)) {
-        photoName = await savePhotoService(photo, 500);
-      }
+    // Verificar si hay una nueva foto en la solicitud
+    if (req.files && Object.values(req.files).length > 0) {
+      const newPhoto = Object.values(req.files)[0];
+      // Subir la nueva foto y obtener la nueva URL
+      photoName = await cloudinaryService(newPhoto);
     }
+
+    // if (req.files) {
+    //   for (let photo of Object.values(req.files).slice(0, 1)) {
+    //     const photo = req.files;
+    //     console.log("antes de mandarlo", photo);
+    //     const photoName = await cloudinaryService(photo);
+    //     // photoName = await savePhotoService(photo, 500);
+    //   }
+    // }
 
     const exercise = await modifExerciseModel(
       exerciseId,

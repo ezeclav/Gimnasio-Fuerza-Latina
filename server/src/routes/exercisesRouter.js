@@ -19,8 +19,8 @@ import {
   getExercisesController,
   likeExerciseController,
   deleteExistLikeController,
+  addExercisePhotoController,
 } from "../controllers/exercises/index.js";
-import addEntryPhotoController from "../controllers/exercises/addEntryPhotoController.js";
 
 ///////////////////////////////////////////////////////////////
 //                   RUTAS DE EJERCICIOS                     //
@@ -31,7 +31,7 @@ router.post(
   "/newExercises",
   authUserController,
   cantEditController,
-  newExercisesController,
+  newExercisesController
 );
 
 // Para MODIFICAR un Ejercicio
@@ -40,7 +40,7 @@ router.put(
   authUserController,
   cantEditController,
   exerciseExistsController,
-  modifExercisescontroller,
+  modifExercisescontroller
 );
 
 // Para ELIMINAR un Ejercicio
@@ -49,7 +49,7 @@ router.delete(
   authUserController,
   cantEditController,
   exerciseExistsController,
-  deleteExercisescontroller,
+  deleteExercisescontroller
 );
 
 // Para visualizar todos los ejercicios
@@ -60,7 +60,7 @@ router.get(
   "/exercise/:exerciseId",
   authUserController,
   exerciseExistsController,
-  getExercisesController,
+  getExercisesController
 );
 
 //Agregar una foto a una entrada
@@ -70,7 +70,7 @@ router.post(
   userExistsController,
   exerciseExistsController,
   cantEditController,
-  addEntryPhotoController,
+  addExercisePhotoController
 );
 
 // Para darle LIKE a un ejercicio
@@ -78,7 +78,7 @@ router.post(
   "/exercise/like/:exerciseId",
   authUserController,
   userExistsController,
-  likeExerciseController,
+  likeExerciseController
 );
 
 // Listar los LIKE de un usuario
@@ -88,7 +88,7 @@ router.get("/listlikes", authUserController, likeExistController);
 router.delete(
   "/dislike/:exerciseId",
   authUserController,
-  deleteExistLikeController,
+  deleteExistLikeController
 );
 
 export default router;

@@ -22,7 +22,6 @@ cloudinary.config({
 
 export const cloudinaryService = async (photo) => {
   try {
-    // console.log(`ezequiel:`, photo);
     // Subir la imagen a Cloudinary
     const imgName = `${uuid()}`;
 
