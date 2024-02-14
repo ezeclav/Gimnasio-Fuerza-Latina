@@ -1,14 +1,17 @@
+import { AuthContext } from "../../../context/AuthContext";
 import { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Modal from "../../Modal";
 import ExercisePhoto from "../ExercisePhoto/ExercisePhoto";
-import ExerciseModify from "../ExerciseModify/ExerciseModify"
+import ExerciseModify from "../ExerciseModify/ExerciseModify";
 import ExerciseDelete from "../ExerciseDelete/ExerciseDelete";
 
 import "./ExerciseDetails.css";
 
 const ExerciseDetails = () => {
+  const { user } = useContext(AuthContext);
+
   const { exerciseId } = useParams();
   const [exercise, setExercise] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -29,7 +32,7 @@ const ExerciseDetails = () => {
         };
         const response = await axios.get(
           `/api/exercise/${exerciseId}`,
-          options,
+          options
         );
         setExercise(response.data.data);
       } catch (err) {
@@ -93,57 +96,59 @@ const ExerciseDetails = () => {
         )}
       </div>
       <div className="buttons-container">
-        <button
-          onClick={() => setShowPhotoModal(true)}
-          className="add-photo-button"
-        >
-          Agregar foto
-        </button>
-        {showPhotoModal && (
-          <Modal>
-            <ExercisePhoto
-              exerciseId={exerciseId}
-              onClose={() => setShowPhotoModal(false)}
-              onUpload={handleUploadSuccess}
-            />
-          </Modal>
-        )}
-        {/*MODAL MODIFICAR EJERCICIO*/}
-        <button
-          onClick={() => setShowModifyModal(true)}
-          className="add-photo-button"
-        >
-          Editar
-        </button>
+        {user.role === "admin" && (
+          <div>
+            <button
+              onClick={() => setShowPhotoModal(true)}
+              className="add-photo-button"
+            >
+              Agregar foto
+            </button>
+            {showPhotoModal && (
+              <Modal>
+                <ExercisePhoto
+                  exerciseId={exerciseId}
+                  onClose={() => setShowPhotoModal(false)}
+                  onUpload={handleUploadSuccess}
+                />
+              </Modal>
+            )}
+            {/*MODAL MODIFICAR EJERCICIO*/}
+            <button
+              onClick={() => setShowModifyModal(true)}
+              className="add-photo-button"
+            >
+              Editar
+            </button>
 
-              
-        {showModifyModal && (
-          <Modal>
-            <ExerciseModify
-              exerciseId={exerciseId}
-              onClose={() => setShowModifyModal(false)}
-              onUpload={handleUploadSuccess}
-            />
-          </Modal>
-        )}
+            {showModifyModal && (
+              <Modal>
+                <ExerciseModify
+                  exerciseId={exerciseId}
+                  onClose={() => setShowModifyModal(false)}
+                  onUpload={handleUploadSuccess}
+                />
+              </Modal>
+            )}
 
-        {/*MODAL ELIMINAR EJERCICIO*/}
-        <button
-          onClick={() => setShowDeleteModal(true)}
-          className="add-photo-button"
-        >
-          Eliminar
-        </button>
+            {/*MODAL ELIMINAR EJERCICIO*/}
+            <button
+              onClick={() => setShowDeleteModal(true)}
+              className="add-photo-button"
+            >
+              Eliminar
+            </button>
 
-              
-        {showDeleteModal && (
-          <Modal>
-            <ExerciseDelete
-              exerciseId={exerciseId}
-              onClose={() => setShowDeleteModal(false)}
-              onUpload={handleUploadSuccess}
-            />
-          </Modal>
+            {showDeleteModal && (
+              <Modal>
+                <ExerciseDelete
+                  exerciseId={exerciseId}
+                  onClose={() => setShowDeleteModal(false)}
+                  onUpload={handleUploadSuccess}
+                />
+              </Modal>
+            )}
+          </div>
         )}
 
         <Link to="#" onClick={() => window.history.back()}>

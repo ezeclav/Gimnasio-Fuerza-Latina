@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { AuthContext } from "../../../context/AuthContext";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ExerciseCard from "../ExerciseCard/ExerciseCard";
@@ -6,6 +7,8 @@ import SearchBar from "../../SearchBar";
 import "./ExerciseList.css";
 
 function ExerciseList() {
+  const { user } = useContext(AuthContext);
+
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,7 +31,7 @@ function ExerciseList() {
 
         // Enlistar de manera ascendente con RESERVE()
         // const reversedExercises = response.data.data.reverse();
-        // console.log(response.data.data);
+
         setExercises(reversedExercises);
       } catch (err) {
         setError(err.message);
@@ -54,10 +57,16 @@ function ExerciseList() {
       exercises.filter(
         (exercise) =>
           exercise.name.toLowerCase().indexOf(searchKeyword.toLowerCase()) !==
-          -1 || exercise.typology.toLowerCase().indexOf(searchKeyword.toLowerCase()) !==
-          -1 || exercise.muscle_group.toLowerCase().indexOf(searchKeyword.toLowerCase()) !==
-          -1 || exercise.equipment.toLowerCase().indexOf(searchKeyword.toLowerCase()) !==
-          -1
+            -1 ||
+          exercise.typology
+            .toLowerCase()
+            .indexOf(searchKeyword.toLowerCase()) !== -1 ||
+          exercise.muscle_group
+            .toLowerCase()
+            .indexOf(searchKeyword.toLowerCase()) !== -1 ||
+          exercise.equipment
+            .toLowerCase()
+            .indexOf(searchKeyword.toLowerCase()) !== -1
       );
   } else {
     result = exercises;
@@ -69,9 +78,11 @@ function ExerciseList() {
       {loading && <h1 className="loading-message">LOADING ...</h1>}
 
       <div className="exerc-container">
-        <Link to="/NewExercise" className="exerc-link">
-          <button>Crear Nuevo Ejercicio</button>
-        </Link>
+        {user.role === "admin" && (
+          <Link to="/NewExercise" className="exerc-link">
+            <button>Crear Nuevo Ejercicio</button>
+          </Link>
+        )}
         <SearchBar searchHandler={searchHandler} />
       </div>
 
