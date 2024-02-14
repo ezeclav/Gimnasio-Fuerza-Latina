@@ -39,11 +39,10 @@ Pueden ver la landing de la plataforma donde podrán registrarse o hacer login.
 - `POST: /users/login` (loguearse como usuario)
 - `POST: /users/password/recover` (recuperación de contraseña de usuario)
 - `PUT: /users/password` (actualización de contraseña de usuario)
-- `GET: /users/:userId` (obtener el perfil público de un usuario)
 - `GET: /users` (obtener el perfil privado del usuario logueado)
 - `PUT: /users/update` (modificar el nombre de usuario logueado)
 
-- Una vez creado los usuarios, el responsable de la BBDD asignará el rol `ADMINISTRADOR` manualmente dentro del Workbench.
+- Una vez creado los usuarios, el responsable de la BBDD asignará el rol `admin` manualmente dentro del Workbench.
 
 ## ENDPOINTS de EJERCICIOS
 
@@ -54,7 +53,6 @@ Pueden ver la landing de la plataforma donde podrán registrarse o hacer login.
 - `GET: /exercises?query=params` (visualizar todos los ejercicios que cumplan la condición de búsqueda, según criterio)
 - `GET: /exercise/:exerciseId` (visualizar un ejercicio según su ID)
 - `POST: /exercises/like/:exerciseId` (darle LIKE a un ejercicio)
-- `DELETE: /exercises/dislike/:exerciseId` (quitarle LIKE a un ejercicio)
 - `GET: /listlikes` (enlistar todos los ejercicios favoritos que el usuario dió LIKE)
 - `DELETE: /dislike/:exerciseId` (quitarle el LIKE a un ejercicio)
 
