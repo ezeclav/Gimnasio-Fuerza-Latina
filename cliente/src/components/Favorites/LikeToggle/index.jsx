@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./likeToogle.css";
 
 const LikeToggle = ({ exerciseId }) => {
-  // Obtener el estado inicial del like del localStorage
   const storedLike = localStorage.getItem(`exercise-${exerciseId}`);
   const [isLiked, setIsLiked] = useState(storedLike === "true");
 
@@ -27,7 +26,7 @@ const LikeToggle = ({ exerciseId }) => {
       }
       // Toggle del estado y almacenar en el localStorage
       setIsLiked((prevIsLiked) => !prevIsLiked);
-      localStorage.setItem(`exercise-${exerciseId}`, (!isLiked).toString());
+      localStorage.setItem(`exercise-${exerciseId}`, (!prevIsLiked).toString()); // Usar !prevIsLiked en lugar de isLiked
     } catch (error) {
       console.error("Error de red:", error);
     }
