@@ -38,3 +38,10 @@
   margin-top: 15px;
   color: rgb(41, 185, 41);
 }
+.e-reset {
+  max-width: 15rem;
+}
+.email-label {
+  color: #646464;
+  font-weight: 300;
+}

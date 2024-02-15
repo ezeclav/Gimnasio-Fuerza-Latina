@@ -59,7 +59,7 @@ const Login = () => {
   // console.log(err);
   return (
     <>
-      <h2>Ingresar</h2>
+      <h2>INGRESAR</h2>
       <form onSubmit={handleSubmit} className="login-form">
         <label htmlFor="">
           Correo

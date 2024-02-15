@@ -80,7 +80,7 @@ function ExerciseList() {
       <div className="exerc-container">
         {user.role === "admin" && (
           <Link to="/NewExercise" className="exerc-link">
-            <button>Crear Nuevo Ejercicio</button>
+            <button className="btn-new">Crear Nuevo Ejercicio</button>
           </Link>
         )}
         <SearchBar searchHandler={searchHandler} />

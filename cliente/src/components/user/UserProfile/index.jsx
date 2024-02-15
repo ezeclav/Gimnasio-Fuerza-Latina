@@ -15,7 +15,7 @@ const UserProfile = ({ toggleEditing }) => {
 
   return (
     <div className="user-profile-container">
-      <h2>Perfil de Usuario</h2>
+      <h2>PERFIL DE USUARIO</h2>
       <p className="user-profile-info">
         <b>Nombre de Usuario: </b>
         {user.username}

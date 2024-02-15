@@ -48,7 +48,7 @@ div ul li {
     background: #666;
     flex-direction: column;
     gap: 10px;
-    width: 15rem; /* Ajusta el ancho según sea necesario */
+    width: 15rem;
   }
 
   .nav_toggle {

@@ -35,3 +35,9 @@
 .save-button:hover {
   background-color: #0056b3;
 }
+
+@media (max-width: 768px) {
+  .label-container label {
+    font-weight: 200;
+  }
+}

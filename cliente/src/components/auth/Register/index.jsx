@@ -76,7 +76,7 @@ const Register = () => {
 
   return (
     <>
-      <h2>Registro</h2>
+      <h2>REGISTRO</h2>
       <form onSubmit={handleSubmit} className="register-form">
         <label htmlFor="">
           Usuario

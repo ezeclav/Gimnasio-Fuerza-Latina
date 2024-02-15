@@ -6,6 +6,7 @@
   border-radius: 8px;
   background-color: #646464;
   text-align: center;
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.7);
 }
 
 .user-profile-container h2 {
@@ -30,4 +31,16 @@
 
 .edit-profile-button:hover {
   background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .user-profile-container {
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #646464;
+    text-align: center;
+  }
 }

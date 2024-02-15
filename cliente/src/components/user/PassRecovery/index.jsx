@@ -55,8 +55,8 @@ function PassRecovery({ handleModal }) {
     <Modal>
       <div className="password-recovery-container">
         <form onSubmit={handlePasswordReset} className="password-recovery-form">
-          <div>
-            <label htmlFor="email-reset">
+          <div className="e-reset">
+            <label className="email-label" htmlFor="email-reset">
               Email para Restablecer Contraseña
               <input
                 required

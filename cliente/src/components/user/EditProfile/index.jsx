@@ -13,7 +13,7 @@ function EditProfile({ toggleEditing }) {
   const handleModal = () => setShowModal((prev) => !prev);
   return (
     <div className="edit-profile-container">
-      <h1>Editar Perfil</h1>
+      <h1>EDITAR PERFIL</h1>
       <EditUserName />
       <a href="#" onClick={handleModal} className="edit-profile-link">
         Actualizar contraseña
